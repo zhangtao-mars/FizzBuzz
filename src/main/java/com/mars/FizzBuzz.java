@@ -10,6 +10,8 @@ import com.mars.rules.implRequirement2.ComplexFizzBuzzRule;
 import com.mars.rules.implRequirement2.ComplexFizzRule;
 import com.mars.rules.implRequirement2.ComplexNoneRule;
 
+import java.util.Arrays;
+
 public class FizzBuzz {
     private Rule rule;
 
@@ -21,49 +23,22 @@ public class FizzBuzz {
     private Rule complexBuzzRule;
     private Rule complexNoneRule;
 
-    /**
-     * 构造需求一的规则对象
-     * @param simpleFizzBuzzRule
-     */
-    /*public FizzBuzz(SimpleFizzBuzzRule simpleFizzBuzzRule) {
-        rule = simpleFizzBuzzRule;
-
-        Rule buzz = new SimpleBuzzRule();
-        Rule fizz = new SimpleFizzRule();
-        Rule none = new SimpleNoneRule();
-
-        rule.setSuccessor(buzz);
-        buzz.setSuccessor(fizz);
-        fizz.setSuccessor(none);
-    }*/
-
-    /**
-     * 构造需求二的规则对象
-     * @param complexFizzBuzzRule
-     */
-    /*public FizzBuzz(ComplexFizzBuzzRule complexFizzBuzzRule) {
-        rule = complexFizzBuzzRule;
-        Rule buzz = new ComplexBuzzRule();
-        Rule fizz = new ComplexFizzRule();
-        Rule none = new ComplexNoneRule();
-
-        rule.setSuccessor(buzz);
-        buzz.setSuccessor(fizz);
-        fizz.setSuccessor(none);
-    }*/
-
     public FizzBuzz() {
     }
 
-    public void output(int start, int end) {
+    public String[] output(int start, int end) {
         if (this.rule == null) {
             System.out.println("Need to set the correct Rule to FizzBuzz class");
-            return;
+            return null;
         }
 
+        String[] fizzBuzzArrays = new String[100];
         for (int i = start; i <= end; i++) {
-            System.out.println(rule.out(i));
+            String result = rule.out(i);
+            fizzBuzzArrays[i-1] = result;
         }
+
+        return fizzBuzzArrays;
     }
 
 
@@ -96,15 +71,17 @@ public class FizzBuzz {
         SimpleFizzBuzzRule simpleFizzBuzzRule = new SimpleFizzBuzzRule();
         ComplexFizzBuzzRule complexFizzBuzzRule = new ComplexFizzBuzzRule();
 
-//      需求一的main 方法实现
+//      requirement one
         fizzBuzz.setRule(simpleFizzBuzzRule);
-        System.out.println("需求一的实现");
-        fizzBuzz.output(1, 100);
+        System.out.println("requirement one output: ");
+        String[] fizzBuzzArrays = fizzBuzz.output(1, 100);
+        Arrays.asList(fizzBuzzArrays).stream().forEach(s -> System.out.println(s));
 
-//      需求二的main 方法实现
+//      requirement two
         fizzBuzz.setRule(complexFizzBuzzRule);
-        System.out.println("\n需求二的实现");
-        fizzBuzz.output(1, 100);
+        System.out.println("\nrequirement two output: ");
+        String[] fizzBuzzArrays2 = fizzBuzz.output(1, 100);
+        Arrays.asList(fizzBuzzArrays2).stream().forEach(s -> System.out.println(s));
 
     }
 }
