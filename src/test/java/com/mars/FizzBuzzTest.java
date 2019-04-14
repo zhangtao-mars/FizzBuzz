@@ -3,9 +3,24 @@ package com.mars;
 import com.mars.rules.implRequirement1.SimpleFizzBuzzRule;
 import com.mars.rules.implRequirement2.ComplexFizzBuzzRule;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FizzBuzzTest {
+
+    private FizzBuzz fizzBuzz;
+    private SimpleFizzBuzzRule simpleFizzBuzzRule;
+    private ComplexFizzBuzzRule complexFizzBuzzRule;
+
+    /**
+     * 单元测试前，初始化对象
+     */
+    @Before
+    public void setUp() {
+        fizzBuzz = new FizzBuzz();
+        simpleFizzBuzzRule = new SimpleFizzBuzzRule();
+        complexFizzBuzzRule = new ComplexFizzBuzzRule();
+    }
 
     /**
      * 单元测试需求一
@@ -15,10 +30,9 @@ public class FizzBuzzTest {
      */
     @Test
     public void testRequirement1() {
-        FizzBuzz fizzBuzz = new FizzBuzz(new SimpleFizzBuzzRule());
-        for (int i = 1; i <= 100; i++) {
-            System.out.println(fizzBuzz.output(i));
-        }
+//        FizzBuzz fizzBuzz = new FizzBuzz(new SimpleFizzBuzzRule());
+        fizzBuzz.setRule(simpleFizzBuzzRule);
+        fizzBuzz.output(1, 100);
 
 //        Assert.assertTrue(fizzBuzz.output(24).equals("Fizz"));
 
@@ -32,9 +46,11 @@ public class FizzBuzzTest {
      */
     @Test
     public void testRequirement2() {
-        FizzBuzz fizzBuzz = new FizzBuzz(new ComplexFizzBuzzRule());
-        for (int i = 1; i <= 100; i++) {
-            System.out.println(fizzBuzz.output(i));
-        }
+//        FizzBuzz fizzBuzz = new FizzBuzz(new ComplexFizzBuzzRule());
+        fizzBuzz.setRule(complexFizzBuzzRule);
+        fizzBuzz.output(1, 100);
+    }
+
+    public static void main(String[] args) {
     }
 }
